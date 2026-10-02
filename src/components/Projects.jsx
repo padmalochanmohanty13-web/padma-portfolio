@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ExternalLink,
@@ -286,7 +287,13 @@ export default function Projects() {
           </div>
 
           {/* Filter Bar */}
-          <div className="flex flex-wrap gap-2 rounded-2xl border border-white/10 bg-white/5 p-1.5 backdrop-blur-md">
+          <div
+            className={`flex flex-wrap gap-2 rounded-2xl border p-1.5 backdrop-blur-md ${
+              isLight
+                ? "border-slate-200 bg-slate-100/80 shadow-inner"
+                : "border-white/10 bg-white/5"
+            }`}
+          >
             {[
               { id: "all", label: "All Work" },
               { id: "featured", label: "Featured" },
@@ -300,8 +307,8 @@ export default function Projects() {
                   filter === tab.id
                     ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-md shadow-cyan-500/20"
                     : isLight
-                    ? "text-slate-600 hover:text-slate-900"
-                    : "text-slate-400 hover:text-white"
+                    ? "text-slate-600 hover:text-slate-900 hover:bg-white"
+                    : "text-slate-400 hover:text-white hover:bg-white/5"
                 }`}
               >
                 {tab.label}
@@ -324,118 +331,128 @@ export default function Projects() {
         </div>
       </div>
 
-      {/* Project Details Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className={`relative max-w-xl w-full max-h-[90vh] overflow-y-auto rounded-3xl border shadow-2xl ${
-                isLight ? "bg-white border-slate-200" : "bg-slate-950 border-white/10"
-              }`}
+      {/* Project Details Modal — portaled to body */}
+      {createPortal(
+        <AnimatePresence>
+          {selectedProject && (
+            <div
+              className="fixed inset-0 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+              style={{ zIndex: 9997 }}
+              onClick={() => setSelectedProject(null)}
             >
-              {/* Modal Image Header */}
-              {selectedProject.image && (
-                <div className="relative h-56 sm:h-64 w-full overflow-hidden">
-                  <img
-                    src={selectedProject.image}
-                    alt={selectedProject.title}
-                    className="h-full w-full object-cover object-top"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent" />
-                  <button
-                    onClick={() => setSelectedProject(null)}
-                    className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-md hover:bg-black/80 transition"
-                  >
-                    <X size={18} />
-                  </button>
-                  <div className="absolute bottom-4 left-6">
-                    <span className="rounded-full bg-cyan-500/20 border border-cyan-400/30 px-3 py-1 text-xs font-bold text-cyan-300 backdrop-blur-md">
-                      {selectedProject.category}
-                    </span>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className={`relative max-w-xl w-full max-h-[90vh] overflow-y-auto rounded-3xl border shadow-2xl ${
+                  isLight ? "bg-white border-slate-200" : "bg-slate-950 border-white/10"
+                }`}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Modal Image Header */}
+                {selectedProject.image && (
+                  <div className="relative h-56 sm:h-64 w-full overflow-hidden">
+                    <img
+                      src={selectedProject.image}
+                      alt={selectedProject.title}
+                      className="h-full w-full object-cover object-top"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent" />
+                    <button
+                      onClick={() => setSelectedProject(null)}
+                      className="absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-md hover:bg-black/80 transition hover:scale-110"
+                      aria-label="Close project modal"
+                    >
+                      <X size={18} />
+                    </button>
+                    <div className="absolute bottom-4 left-6">
+                      <span className="rounded-full bg-cyan-500/20 border border-cyan-400/30 px-3 py-1 text-xs font-bold text-cyan-300 backdrop-blur-md">
+                        {selectedProject.category}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              )}
-
-              <div className="p-6 sm:p-8">
-                {!selectedProject.image && (
-                  <button
-                    onClick={() => setSelectedProject(null)}
-                    className="absolute top-5 right-5 rounded-full p-2 text-slate-400 hover:bg-white/10 hover:text-white"
-                  >
-                    <X size={20} />
-                  </button>
                 )}
 
-                <h3
-                  className={`text-2xl font-black ${
-                    isLight ? "text-slate-900" : "text-white"
-                  }`}
-                >
-                  {selectedProject.title}
-                </h3>
-
-                <p
-                  className={`mt-3 text-sm leading-relaxed ${
-                    isLight ? "text-slate-600" : "text-slate-300"
-                  }`}
-                >
-                  {selectedProject.description}
-                </p>
-
-                <div className="mt-6">
-                  <h4
-                    className={`text-xs font-bold uppercase tracking-wider ${
-                      isLight ? "text-slate-800" : "text-slate-300"
-                    }`}
-                  >
-                    Key Features & Technical Capabilities
-                  </h4>
-                  <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {selectedProject.features.map((feature) => (
-                      <div
-                        key={feature}
-                        className="flex items-center gap-2 text-xs text-slate-400"
-                      >
-                        <CheckCircle2 size={14} className="text-cyan-400 shrink-0" />
-                        <span>{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mt-8 flex flex-wrap gap-3">
-                  {selectedProject.live && selectedProject.live !== "#" && (
-                    <a
-                      href={selectedProject.live}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400 py-3 text-xs font-bold text-white shadow-md shadow-cyan-500/25 transition hover:scale-102"
+                <div className="p-6 sm:p-8">
+                  {!selectedProject.image && (
+                    <button
+                      onClick={() => setSelectedProject(null)}
+                      className="absolute top-5 right-5 rounded-full p-2 text-slate-400 hover:bg-white/10 hover:text-white"
+                      aria-label="Close project modal"
                     >
-                      <ExternalLink size={15} /> Open Live Application
-                    </a>
+                      <X size={20} />
+                    </button>
                   )}
 
-                  <a
-                    href={selectedProject.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={`flex items-center justify-center gap-2 rounded-xl border px-5 py-3 text-xs font-semibold ${
-                      isLight
-                        ? "border-slate-300 text-slate-700 hover:bg-slate-100"
-                        : "border-white/10 text-slate-300 hover:bg-white/10"
+                  <h3
+                    className={`text-2xl font-black ${
+                      isLight ? "text-slate-900" : "text-white"
                     }`}
                   >
-                    <Github size={16} /> GitHub Code
-                  </a>
+                    {selectedProject.title}
+                  </h3>
+
+                  <p
+                    className={`mt-3 text-sm leading-relaxed ${
+                      isLight ? "text-slate-600" : "text-slate-300"
+                    }`}
+                  >
+                    {selectedProject.description}
+                  </p>
+
+                  <div className="mt-6">
+                    <h4
+                      className={`text-xs font-bold uppercase tracking-wider ${
+                        isLight ? "text-slate-800" : "text-slate-300"
+                      }`}
+                    >
+                      Key Features & Technical Capabilities
+                    </h4>
+                    <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      {selectedProject.features.map((feature) => (
+                        <div
+                          key={feature}
+                          className="flex items-center gap-2 text-xs text-slate-400"
+                        >
+                          <CheckCircle2 size={14} className="text-cyan-400 shrink-0" />
+                          <span>{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mt-8 flex flex-wrap gap-3">
+                    {selectedProject.live && selectedProject.live !== "#" && (
+                      <a
+                        href={selectedProject.live}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400 py-3 text-xs font-bold text-white shadow-md shadow-cyan-500/25 transition hover:scale-102"
+                      >
+                        <ExternalLink size={15} /> Open Live Application
+                      </a>
+                    )}
+
+                    <a
+                      href={selectedProject.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={`flex items-center justify-center gap-2 rounded-xl border px-5 py-3 text-xs font-semibold ${
+                        isLight
+                          ? "border-slate-300 text-slate-700 hover:bg-slate-100"
+                          : "border-white/10 text-slate-300 hover:bg-white/10"
+                      }`}
+                    >
+                      <Github size={16} /> GitHub Code
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 }

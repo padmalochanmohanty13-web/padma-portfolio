@@ -4,6 +4,7 @@ import { Github, Menu, X, Linkedin, Download, Sparkles } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 import { useResume } from "../context/ResumeContext";
 import { useTheme, THEMES } from "../context/ThemeContext";
+import { personalInfo } from "../data/portfolioData";
 
 const links = [
   { label: "About", id: "about" },
@@ -179,7 +180,7 @@ export default function Navbar() {
           {/* Social Links Divider */}
           <div className="flex items-center gap-1 border-l border-slate-300/40 dark:border-white/10 pl-2">
             <a
-              href="https://github.com/padmalochanmohanty13-web"
+              href={personalInfo.github}
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub Profile"
@@ -193,7 +194,7 @@ export default function Navbar() {
             </a>
 
             <a
-              href="https://linkedin.com/in/padmalochan-mohanty"
+              href={personalInfo.linkedin}
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn Profile"
@@ -282,7 +283,7 @@ export default function Navbar() {
             <div className="mt-3 flex items-center justify-between border-t border-slate-200/50 dark:border-white/10 pt-3">
               <div className="flex items-center gap-2">
                 <a
-                  href="https://github.com/padmalochanmohanty13-web"
+                  href={personalInfo.github}
                   target="_blank"
                   rel="noreferrer"
                   className="rounded-lg p-2 text-slate-400 hover:text-white"
@@ -290,7 +291,7 @@ export default function Navbar() {
                   <Github size={17} />
                 </a>
                 <a
-                  href="https://linkedin.com/in/padmalochan-mohanty"
+                  href={personalInfo.linkedin}
                   target="_blank"
                   rel="noreferrer"
                   className="rounded-lg p-2 text-slate-400 hover:text-blue-400"

@@ -255,7 +255,7 @@ export default function Hero() {
               {/* Decorative Gradient Border */}
               <div className="relative rounded-full p-1 bg-gradient-to-tr from-cyan-400 via-blue-500 to-indigo-500 shadow-2xl">
                 <div
-                  className={`h-56 w-56 sm:h-64 sm:w-64 lg:h-72 lg:w-72 overflow-hidden rounded-full ${
+                  className={`h-52 w-52 sm:h-64 sm:w-64 lg:h-72 lg:w-72 overflow-hidden rounded-full ${
                     isLight ? "bg-white" : "bg-slate-900"
                   }`}
                 >
@@ -271,7 +271,7 @@ export default function Hero() {
               <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                className={`absolute -top-2 right-1 sm:-top-3 sm:right-2 flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-bold shadow-lg backdrop-blur-xl ${
+                className={`absolute -top-2 right-0 sm:-top-3 sm:right-2 flex items-center gap-1.5 rounded-xl border px-2.5 py-1 sm:px-3 sm:py-1.5 text-[11px] sm:text-xs font-bold shadow-lg backdrop-blur-xl ${
                   isLight
                     ? "border-slate-200 bg-white/95 text-slate-800"
                     : "border-cyan-400/30 bg-slate-950/90 text-white"
@@ -286,7 +286,7 @@ export default function Hero() {
               <motion.div
                 animate={{ y: [0, 6, 0] }}
                 transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
-                className={`absolute -bottom-2 left-2 sm:-bottom-3 sm:left-3 flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-bold shadow-lg backdrop-blur-xl ${
+                className={`absolute -bottom-2 left-0 sm:-bottom-3 sm:left-3 flex items-center gap-1.5 rounded-xl border px-2.5 py-1 sm:px-3 sm:py-1.5 text-[11px] sm:text-xs font-bold shadow-lg backdrop-blur-xl ${
                   isLight
                     ? "border-slate-200 bg-white/95 text-slate-800"
                     : "border-emerald-400/30 bg-slate-950/90 text-white"
@@ -299,7 +299,7 @@ export default function Hero() {
               <motion.div
                 animate={{ y: [0, -5, 0] }}
                 transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 0.5 }}
-                className={`absolute top-1/2 -left-5 sm:-left-8 -translate-y-1/2 flex items-center gap-1.5 rounded-xl border px-3 py-1.5 text-xs font-bold shadow-lg backdrop-blur-xl ${
+                className={`absolute top-1/2 -left-3 sm:-left-8 -translate-y-1/2 flex items-center gap-1.5 rounded-xl border px-2.5 py-1 sm:px-3 sm:py-1.5 text-[11px] sm:text-xs font-bold shadow-lg backdrop-blur-xl ${
                   isLight
                     ? "border-slate-200 bg-white/95 text-slate-800"
                     : "border-blue-400/30 bg-slate-950/90 text-white"

@@ -50,7 +50,7 @@ export default function Experience() {
         </div>
 
         {/* Timeline */}
-        <div className="relative ml-4 border-l-2 border-cyan-500/30 pl-6 sm:pl-10 space-y-10">
+        <div className="relative ml-2 sm:ml-4 border-l-2 border-cyan-500/30 pl-5 sm:pl-10 space-y-10">
           {experiences.map((experience, index) => (
             <motion.div
               key={`${experience.company}-${experience.role}-${index}`}
@@ -60,8 +60,8 @@ export default function Experience() {
               transition={{ delay: index * 0.1 }}
               className="relative"
             >
-              {/* Pulsing Timeline Node */}
-              <div className="absolute -left-[35px] sm:-left-[51px] top-1.5 flex h-7 w-7 items-center justify-center rounded-full border-2 border-cyan-400 bg-slate-950 shadow-md shadow-cyan-500/50">
+              {/* Pulsing Timeline Node — centered on border line */}
+              <div className="absolute -left-[1px] -translate-x-1/2 top-1.5 flex h-7 w-7 items-center justify-center rounded-full border-2 border-cyan-400 bg-slate-950 shadow-md shadow-cyan-500/50">
                 <span className={`h-2.5 w-2.5 rounded-full ${experience.current ? "bg-emerald-400 animate-ping" : "bg-cyan-400"}`} />
               </div>
 

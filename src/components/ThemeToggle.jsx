@@ -47,17 +47,17 @@ export default function ThemeToggle({ variant = "navbar" }) {
 
   if (variant === "floating") {
     return (
-      <div className="fixed bottom-6 right-6 z-40" ref={menuRef}>
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40" ref={menuRef}>
         <div className="relative">
           <motion.button
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setMenuOpen(!menuOpen)}
-            className="flex h-12 w-12 items-center justify-center rounded-full shadow-2xl border border-white/20 bg-slate-900/90 text-white backdrop-blur-xl transition hover:shadow-cyan-500/25"
+            className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full shadow-2xl border border-white/20 bg-slate-900/90 text-white backdrop-blur-xl transition hover:shadow-cyan-500/25"
             title="Change Screen Theme"
             aria-label="Change screen theme"
           >
-            <CurrentIcon className="h-5 w-5 text-cyan-400" />
+            <CurrentIcon className="h-4 w-4 sm:h-5 sm:w-5 text-cyan-400" />
           </motion.button>
 
           <AnimatePresence>

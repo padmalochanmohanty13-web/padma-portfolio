@@ -99,13 +99,21 @@ export default function Skills() {
           </div>
 
           {/* Filter Pills */}
-          <div className="flex flex-wrap gap-1.5 rounded-2xl border border-white/10 bg-white/5 p-1.5 backdrop-blur-md">
+          <div
+            className={`flex flex-wrap gap-1.5 rounded-2xl border p-1.5 backdrop-blur-md ${
+              isLight
+                ? "border-slate-200 bg-slate-100/80 shadow-inner"
+                : "border-white/10 bg-white/5"
+            }`}
+          >
             <button
               onClick={() => setActiveTab("All")}
               className={`rounded-xl px-3 py-1.5 text-xs font-semibold transition ${
                 activeTab === "All"
                   ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-md shadow-cyan-500/20"
-                  : "text-slate-400 hover:text-white"
+                  : isLight
+                  ? "text-slate-600 hover:text-slate-900 hover:bg-white"
+                  : "text-slate-400 hover:text-white hover:bg-white/5"
               }`}
             >
               All Skills
@@ -117,7 +125,9 @@ export default function Skills() {
                 className={`rounded-xl px-3 py-1.5 text-xs font-semibold transition ${
                   activeTab === cat
                     ? "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-md shadow-cyan-500/20"
-                    : "text-slate-400 hover:text-white"
+                    : isLight
+                    ? "text-slate-600 hover:text-slate-900 hover:bg-white"
+                    : "text-slate-400 hover:text-white hover:bg-white/5"
                 }`}
               >
                 {cat}

@@ -14,7 +14,7 @@ export const personalInfo = {
 
   github: "https://github.com/padmalochanmohanty13-web",
 
-  linkedin: "https://linkedin.com/in/padmalochan-mohanty",
+  linkedin: "https://www.linkedin.com/in/padmalochan-mohanty-468518380",
 
   resume: "/resume.pdf",
 };

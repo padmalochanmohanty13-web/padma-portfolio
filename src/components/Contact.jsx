@@ -134,18 +134,18 @@ export default function Contact() {
           <div className="space-y-4">
             {/* Availability Badge */}
             <div
-              className={`rounded-2xl border p-5 backdrop-blur-xl ${
+              className={`rounded-2xl border p-3.5 sm:p-5 backdrop-blur-xl ${
                 isLight
                   ? "border-emerald-200 bg-emerald-50/60"
                   : "border-emerald-500/20 bg-emerald-500/5"
               }`}
             >
               <div className="flex items-center gap-3">
-                <span className="relative flex h-3 w-3">
+                <span className="relative flex h-3 w-3 shrink-0">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500" />
                 </span>
-                <div>
+                <div className="min-w-0 flex-1">
                   <h4
                     className={`text-xs font-bold uppercase tracking-wider ${
                       isLight ? "text-emerald-800" : "text-emerald-400"
@@ -154,7 +154,7 @@ export default function Contact() {
                     Open for Opportunities
                   </h4>
                   <p
-                    className={`mt-0.5 text-xs ${
+                    className={`mt-0.5 text-xs leading-relaxed ${
                       isLight ? "text-slate-600" : "text-slate-400"
                     }`}
                   >
@@ -166,7 +166,7 @@ export default function Contact() {
 
             {/* Email Card with Quick Copy */}
             <div
-              className={`group flex items-center justify-between rounded-2xl border p-5 backdrop-blur-xl transition duration-300 ${
+              className={`group flex items-center justify-between rounded-2xl border p-3.5 sm:p-5 backdrop-blur-xl transition duration-300 ${
                 isLight
                   ? "border-slate-200/80 bg-white/80 shadow-md hover:border-cyan-400/50"
                   : "border-white/10 bg-slate-900/60 hover:border-cyan-400/40"
@@ -174,19 +174,20 @@ export default function Contact() {
             >
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="flex items-center gap-4 flex-1 min-w-0"
+                className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0"
               >
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/20">
-                  <Mail size={22} />
+                <div className="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/20">
+                  <Mail size={18} className="sm:h-[22px] sm:w-[22px]" />
                 </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <div className="min-w-0 flex-1 pr-1">
+                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400">
                     Email Address
                   </p>
                   <p
-                    className={`mt-0.5 truncate text-sm font-medium ${
+                    className={`mt-0.5 truncate text-xs sm:text-sm font-medium ${
                       isLight ? "text-slate-800" : "text-slate-200"
                     }`}
+                    title={personalInfo.email}
                   >
                     {personalInfo.email}
                   </p>
@@ -194,7 +195,7 @@ export default function Contact() {
               </a>
               <button
                 onClick={() => handleCopy(personalInfo.email, "email")}
-                className={`ml-2 rounded-xl p-2.5 transition ${
+                className={`shrink-0 rounded-xl p-2 sm:p-2.5 transition ${
                   copiedType === "email"
                     ? "bg-emerald-500/20 text-emerald-400"
                     : isLight
@@ -202,14 +203,15 @@ export default function Contact() {
                     : "text-slate-400 hover:bg-white/10 hover:text-white"
                 }`}
                 title="Copy email address"
+                aria-label="Copy email address"
               >
-                {copiedType === "email" ? <Check size={17} /> : <Copy size={17} />}
+                {copiedType === "email" ? <Check size={16} /> : <Copy size={16} />}
               </button>
             </div>
 
             {/* Phone Card with Quick Copy */}
             <div
-              className={`group flex items-center justify-between rounded-2xl border p-5 backdrop-blur-xl transition duration-300 ${
+              className={`group flex items-center justify-between rounded-2xl border p-3.5 sm:p-5 backdrop-blur-xl transition duration-300 ${
                 isLight
                   ? "border-slate-200/80 bg-white/80 shadow-md hover:border-cyan-400/50"
                   : "border-white/10 bg-slate-900/60 hover:border-cyan-400/40"
@@ -217,19 +219,20 @@ export default function Contact() {
             >
               <a
                 href={`tel:${personalInfo.phone}`}
-                className="flex items-center gap-4 flex-1 min-w-0"
+                className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0"
               >
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/20">
-                  <Phone size={22} />
+                <div className="flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/20">
+                  <Phone size={18} className="sm:h-[22px] sm:w-[22px]" />
                 </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                <div className="min-w-0 flex-1 pr-1">
+                  <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400">
                     Phone / WhatsApp
                   </p>
                   <p
-                    className={`mt-0.5 truncate text-sm font-medium ${
+                    className={`mt-0.5 truncate text-xs sm:text-sm font-medium ${
                       isLight ? "text-slate-800" : "text-slate-200"
                     }`}
+                    title={personalInfo.phone}
                   >
                     {personalInfo.phone}
                   </p>
@@ -237,7 +240,7 @@ export default function Contact() {
               </a>
               <button
                 onClick={() => handleCopy(personalInfo.phone, "phone")}
-                className={`ml-2 rounded-xl p-2.5 transition ${
+                className={`shrink-0 rounded-xl p-2 sm:p-2.5 transition ${
                   copiedType === "phone"
                     ? "bg-emerald-500/20 text-emerald-400"
                     : isLight
@@ -245,30 +248,31 @@ export default function Contact() {
                     : "text-slate-400 hover:bg-white/10 hover:text-white"
                 }`}
                 title="Copy phone number"
+                aria-label="Copy phone number"
               >
-                {copiedType === "phone" ? <Check size={17} /> : <Copy size={17} />}
+                {copiedType === "phone" ? <Check size={16} /> : <Copy size={16} />}
               </button>
             </div>
 
-            {/* Social Grid */}
-            <div className="grid grid-cols-2 gap-4">
+            {/* Social Grid — 1 column on <=380px, 2 columns on larger */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <a
                 href={personalInfo.github}
                 target="_blank"
                 rel="noreferrer"
-                className={`group flex items-center gap-3.5 rounded-2xl border p-4 backdrop-blur-xl transition hover:-translate-y-1 ${
+                className={`group flex items-center gap-3 rounded-2xl border p-3.5 sm:p-4 backdrop-blur-xl transition hover:-translate-y-0.5 ${
                   isLight
                     ? "border-slate-200/80 bg-white/80 shadow-md hover:border-slate-400"
                     : "border-white/10 bg-slate-900/60 hover:border-white/30"
                 }`}
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-slate-200 group-hover:scale-110 transition">
-                  <Github size={20} />
+                <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-white/10 text-slate-200 group-hover:scale-105 transition">
+                  <Github size={18} />
                 </div>
-                <div>
-                  <p className="text-[11px] text-slate-400 font-medium">Code Base</p>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[10px] sm:text-[11px] text-slate-400 font-medium">Code Base</p>
                   <p
-                    className={`text-xs font-bold ${
+                    className={`text-xs font-bold truncate ${
                       isLight ? "text-slate-800" : "text-slate-200"
                     }`}
                   >
@@ -281,19 +285,19 @@ export default function Contact() {
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className={`group flex items-center gap-3.5 rounded-2xl border p-4 backdrop-blur-xl transition hover:-translate-y-1 ${
+                className={`group flex items-center gap-3 rounded-2xl border p-3.5 sm:p-4 backdrop-blur-xl transition hover:-translate-y-0.5 ${
                   isLight
                     ? "border-slate-200/80 bg-white/80 shadow-md hover:border-blue-400"
                     : "border-white/10 bg-slate-900/60 hover:border-blue-400/40"
                 }`}
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400 group-hover:scale-110 transition">
-                  <Linkedin size={20} />
+                <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400 group-hover:scale-105 transition">
+                  <Linkedin size={18} />
                 </div>
-                <div>
-                  <p className="text-[11px] text-slate-400 font-medium">Network</p>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[10px] sm:text-[11px] text-slate-400 font-medium">Network</p>
                   <p
-                    className={`text-xs font-bold ${
+                    className={`text-xs font-bold truncate ${
                       isLight ? "text-slate-800" : "text-slate-200"
                     }`}
                   >
@@ -305,14 +309,14 @@ export default function Contact() {
 
             {/* Fast Response Guarantee */}
             <div
-              className={`flex items-center gap-3 rounded-2xl border p-4 text-xs ${
+              className={`flex items-center gap-3 rounded-2xl border p-3.5 sm:p-4 text-xs ${
                 isLight
                   ? "border-slate-200 bg-white/60 text-slate-600"
                   : "border-white/5 bg-white/[0.02] text-slate-400"
               }`}
             >
               <Clock size={16} className="text-cyan-400 shrink-0" />
-              <span>
+              <span className="leading-relaxed text-[11px] sm:text-xs">
                 Standard turnaround time: <strong>Within 24 hours</strong>. Direct client-side message dispatch with instant confirmation.
               </span>
             </div>
@@ -320,15 +324,15 @@ export default function Contact() {
 
           {/* Right Column: Animated Client-Side Contact Form */}
           <div
-            className={`relative rounded-3xl border p-6 sm:p-8 backdrop-blur-xl shadow-2xl transition duration-300 ${
+            className={`relative rounded-3xl border p-4 sm:p-8 backdrop-blur-xl shadow-2xl transition duration-300 ${
               isLight
                 ? "border-slate-200/80 bg-white/90 shadow-slate-200/50"
                 : "border-white/10 bg-slate-900/70"
             }`}
           >
-            <div className="mb-6 flex items-center justify-between border-b border-white/5 pb-4">
+            <div className="mb-5 sm:mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/5 pb-4">
               <div className="flex items-center gap-2.5">
-                <MessageSquare className="text-cyan-400" size={18} />
+                <MessageSquare className="text-cyan-400 shrink-0" size={18} />
                 <h3
                   className={`text-base font-bold ${
                     isLight ? "text-slate-900" : "text-white"
@@ -337,8 +341,8 @@ export default function Contact() {
                   Send a Direct Message
                 </h3>
               </div>
-              <span className="flex items-center gap-1.5 text-[11px] font-medium text-emerald-400">
-                <ShieldCheck size={14} /> Zero Backend • Safe Client Dispatch
+              <span className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-medium text-emerald-400">
+                <ShieldCheck size={13} className="shrink-0" /> Zero Backend • Safe Client Dispatch
               </span>
             </div>
 
@@ -483,11 +487,11 @@ export default function Contact() {
               </AnimatePresence>
 
               {/* Submit Buttons */}
-              <div className="pt-2 flex flex-wrap items-center gap-3">
+              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 <button
                   type="submit"
                   disabled={status === "sending"}
-                  className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-cyan-500/25 transition duration-300 hover:scale-102 hover:shadow-cyan-500/40 active:scale-98 disabled:opacity-60"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-cyan-500/25 transition duration-300 hover:scale-102 hover:shadow-cyan-500/40 active:scale-98 disabled:opacity-60"
                 >
                   {status === "sending" ? (
                     <>
@@ -504,7 +508,7 @@ export default function Contact() {
 
                 <a
                   href={mailtoLink}
-                  className={`flex items-center gap-2 rounded-xl border px-4 py-3.5 text-xs font-semibold transition ${
+                  className={`flex items-center justify-center gap-2 rounded-xl border px-4 py-3.5 text-xs font-semibold transition ${
                     isLight
                       ? "border-slate-300 text-slate-700 hover:bg-slate-100"
                       : "border-white/10 text-slate-300 hover:border-cyan-400/30 hover:bg-white/5"
